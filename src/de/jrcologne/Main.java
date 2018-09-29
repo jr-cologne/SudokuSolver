@@ -9,13 +9,19 @@ public class Main {
 
         if (sudokuArr == null) {
             System.out.println("Failed to read file!");
-            System.exit(0);
+            return;
         }
 
         Sudoku sudoku = (new Sudoku()).init(sudokuArr);
 
         sudoku.print();
         System.out.println();
+
+        if (!sudoku.validate()) {
+            System.out.println("Sudoku is not valid!");
+            return;
+        }
+
         System.out.println("Solving Sudoku ...");
 
         sudoku = (new SudokuSolver()).solve(sudoku);
