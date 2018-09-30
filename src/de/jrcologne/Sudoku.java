@@ -1,3 +1,20 @@
+/**
+ * A simple command-line application for solving Sudokus.
+ *
+ * @author JR Cologne <kontakt@jr-cologne.de>
+ * @copyright 2018 JR Cologne
+ * @license MIT (see LICENSE file or https://github.com/jr-cologne/SudokuSolver/blob/master/LICENSE for more info)
+ * @version v1.0.0
+ * @link https://github.com/jr-cologne/SudokuSolver GitHub Repository
+ *
+ * ________________________________________________________________________________
+ *
+ * Sudoku.java
+ *
+ * The class which represents a Sudoku.
+ *
+ */
+
 package de.jrcologne;
 
 import java.io.BufferedReader;
@@ -66,15 +83,12 @@ class Sudoku {
 
     void print() {
         for (int i = 0; i < 9; i ++) {
-            System.out.println("+---+---+---+---+---+---+---+---+---+");
-
             for (int j = 0; j < 9; j++) {
-                System.out.print("| " + this.board[i][j].getValue() + " ");
+                System.out.print(this.board[i][j].getValue());
             }
 
-            System.out.println("|");
+            System.out.println();
         }
-        System.out.println("+---+---+---+---+---+---+---+---+---+");
     }
 
     void setCellValue(int x, int y, String value) {

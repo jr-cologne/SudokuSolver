@@ -1,10 +1,25 @@
+/**
+ * A simple command-line application for solving Sudokus.
+ *
+ * @author JR Cologne <kontakt@jr-cologne.de>
+ * @copyright 2018 JR Cologne
+ * @license MIT (see LICENSE file or https://github.com/jr-cologne/SudokuSolver/blob/master/LICENSE for more info)
+ * @version v1.0.0
+ * @link https://github.com/jr-cologne/SudokuSolver GitHub Repository
+ *
+ * ________________________________________________________________________________
+ *
+ * Main.java
+ *
+ * The main class which is the entry point into the application.
+ *
+ */
+
 package de.jrcologne;
 
 public class Main {
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
-
         String[][] sudokuArr = Sudoku.readFromFile(args[0]);
 
         if (sudokuArr == null) {
@@ -14,27 +29,14 @@ public class Main {
 
         Sudoku sudoku = (new Sudoku()).init(sudokuArr);
 
-        sudoku.print();
-        System.out.println();
-
         if (!sudoku.validate()) {
             System.out.println("Sudoku is not valid!");
             return;
         }
 
-        System.out.println("Solving Sudoku ...");
-
         sudoku = (new SudokuSolver()).solve(sudoku);
 
-        System.out.println();
         sudoku.print();
-
-        long endTime = System.nanoTime();
-
-        long duration = (endTime - startTime) / 1000000;
-
-        System.out.println();
-        System.out.println("Execution time: " + duration + "ms");
     }
 
 }

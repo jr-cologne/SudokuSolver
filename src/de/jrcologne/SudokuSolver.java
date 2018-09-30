@@ -1,3 +1,20 @@
+/**
+ * A simple command-line application for solving Sudokus.
+ *
+ * @author JR Cologne <kontakt@jr-cologne.de>
+ * @copyright 2018 JR Cologne
+ * @license MIT (see LICENSE file or https://github.com/jr-cologne/SudokuSolver/blob/master/LICENSE for more info)
+ * @version v1.0.0
+ * @link https://github.com/jr-cologne/SudokuSolver GitHub Repository
+ *
+ * ________________________________________________________________________________
+ *
+ * SudokuSolver.java
+ *
+ * The class which is responsible for solving the Sudoku.
+ *
+ */
+
 package de.jrcologne;
 
 import java.util.Map;
@@ -20,7 +37,6 @@ class SudokuSolver {
             return this.sudoku;
         }
 
-        System.out.println();
         System.out.println("Sudoku is already solved!");
 
         return this.sudoku;
