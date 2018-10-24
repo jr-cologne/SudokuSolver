@@ -20,6 +20,11 @@ package de.jrcologne;
 public class Main {
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            printAppScreen();
+            return;
+        }
+
         String[][] sudokuArr = Sudoku.readFromFile(args[0]);
 
         if (sudokuArr == null) {
@@ -37,6 +42,20 @@ public class Main {
         sudoku = (new SudokuSolver()).solve(sudoku);
 
         sudoku.print();
+    }
+
+    private static void printAppScreen() {
+        System.out.println("****************************************");
+        System.out.println("jr-cologne/SudokuSolver - A simple command-line application for solving Sudokus.");
+        System.out.println("********************");
+        System.out.println("Copyright (c) 2018 JR Cologne");
+        System.out.println("Licensed under MIT License");
+        System.out.println("v1.0.0");
+        System.out.println("GitHub: https://github.com/jr-cologne/SudokuSolver");
+        System.out.println("********************");
+        System.out.println("Usage: java -jar SudokuSolver.jar input.txt");
+        System.out.println("****************************************");
+        System.out.println();
     }
 
 }

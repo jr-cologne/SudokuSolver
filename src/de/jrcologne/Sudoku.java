@@ -128,7 +128,7 @@ class Sudoku {
     }
 
     Map<String, Integer> getVacantCell() {
-        Map<String, Integer> vacantCell = new HashMap<String, Integer>();
+        Map<String, Integer> vacantCell = new HashMap<>();
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -157,7 +157,7 @@ class Sudoku {
     }
 
     private Stack<String> getColumnNumbers(int x) {
-        Stack<String> columnNumbers = new Stack<String>();
+        Stack<String> columnNumbers = new Stack<>();
 
         for (int i = 0; i < 9; i++) {
             String val = this.board[i][x].getValue();
@@ -171,7 +171,7 @@ class Sudoku {
     }
 
     private Stack<String> getRowNumbers(int y) {
-        Stack<String> rowNumbers = new Stack<String>();
+        Stack<String> rowNumbers = new Stack<>();
 
         for (int i = 0; i < 9; i++) {
             String val = this.board[y][i].getValue();
@@ -188,7 +188,7 @@ class Sudoku {
         x -= x % 3;
         y -= y % 3;
 
-        Stack<String> boxNumbers = new Stack<String>();
+        Stack<String> boxNumbers = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -204,16 +204,16 @@ class Sudoku {
     }
 
     private boolean checkColumn(int x, boolean ignoreEmptyCells) {
-        Stack<String> columnNumbers = new Stack<String>();
+        Stack<String> columnNumbers = new Stack<>();
 
         for (int i = 0; i < 9; i++) {
             String val = this.board[i][x].getValue();
 
-            if ( (!ignoreEmptyCells && val.equals(" ")) || inStack(columnNumbers, val) ) {
+            if ( checkCellValue(val, ignoreEmptyCells, columnNumbers) ) {
                 return false;
             }
 
-            if ( !val.equals(" ") ) {
+            if (!val.equals(" ")) {
                 columnNumbers.push(val);
             }
         }
@@ -222,16 +222,16 @@ class Sudoku {
     }
 
     private boolean checkRow(int y, boolean ignoreEmptyCells) {
-        Stack<String> rowNumbers = new Stack<String>();
+        Stack<String> rowNumbers = new Stack<>();
 
         for (int i = 0; i < 9; i++) {
             String val = this.board[y][i].getValue();
 
-            if ( (!ignoreEmptyCells && val.equals(" ")) || inStack(rowNumbers, val) ) {
+            if ( checkCellValue(val, ignoreEmptyCells, rowNumbers) ) {
                 return false;
             }
 
-            if ( !val.equals(" ") ) {
+            if (!val.equals(" ")) {
                 rowNumbers.push(val);
             }
         }
@@ -240,23 +240,29 @@ class Sudoku {
     }
 
     private boolean checkBox(int x, int y, boolean ignoreEmptyCells) {
-        Stack<String> boxNumbers = new Stack<String>();
+        Stack<String> boxNumbers = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 String val = this.board[y + i][x + j].getValue();
 
-                if ( (!ignoreEmptyCells && val.equals(" ")) || inStack(boxNumbers, val) ) {
-                    return false;
-                }
+                if ( checkCellValue(val, ignoreEmptyCells, boxNumbers) ) return false;
 
-                if ( !val.equals(" ") ) {
+                if (!val.equals(" ")) {
                     boxNumbers.push(val);
                 }
             }
         }
 
         return true;
+    }
+
+    private boolean checkCellValue(String val, boolean ignoreEmptyCells, Stack<String> numbers) {
+        return cellEmpty(val, ignoreEmptyCells) || inStack(numbers, val);
+    }
+
+    private boolean cellEmpty(String val, boolean ignoreEmptyCells) {
+        return !ignoreEmptyCells && val.equals(" ");
     }
 
     private boolean inStack(Stack stack, Object o) {
